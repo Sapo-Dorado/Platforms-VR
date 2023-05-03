@@ -18,12 +18,15 @@ public class Jetpack : MonoBehaviour
     private float fuel = 0;
 
     Vector3 getForce() {
+        int debugJetpack = -1;
+        //Set to 1 to reverse direction to make navigation within unity easier
+        // int debugJetpack = 1;
         Vector3 dir = new Vector3(0,0,0);
         if (rightController.activateAction.action.ReadValue<float>() == 1) {
-            dir += Vector3.Normalize(-rightController.transform.forward);
+            dir += Vector3.Normalize(debugJetpack * rightController.transform.forward);
         }
         if (leftController.activateAction.action.ReadValue<float>() == 1) {
-            dir += Vector3.Normalize(-leftController.transform.forward);
+            dir += Vector3.Normalize(debugJetpack * leftController.transform.forward);
         }
         return dir * acceleration * 100 * Time.deltaTime;
     }

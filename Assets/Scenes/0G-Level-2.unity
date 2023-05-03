@@ -151,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10750751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.8, y: 12.5, z: 59.5}
+  m_LocalPosition: {x: 4.1, y: 1.3, z: 59.5}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -272,7 +272,7 @@ MonoBehaviour:
   provider: {fileID: 101751212}
   levelText: {fileID: 1238704631}
   levelNumberText: {fileID: 1016647675}
-  levelIdx: 0
+  levelIdx: 1
 --- !u!114 &101751212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   rightController: {fileID: 994725589}
   leftController: {fileID: 280090425}
   fuelIndicator: {fileID: 866772304}
-  startingFuel: 100
+  startingFuel: 2
   acceleration: 1
   maxSpeed: 3
 --- !u!136 &101751219
