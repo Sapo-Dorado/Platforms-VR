@@ -7,28 +7,42 @@ public class Jetpack : MonoBehaviour
 {
     public ActionBasedController rightController;
     public ActionBasedController leftController;
-    public float speed;
+    public float acceleration;
+    public float maxSpeed;
 
     private Rigidbody body;
 
     Vector3 getForce() {
-        Vector3 dir = Vector3.Normalize(-rightController.transform.forward) + Vector3.Normalize(-leftController.transform.forward);
-        return (dir / 2) * speed * 1000 * Time.deltaTime;
+        Vector3 dir = new Vector3(0,0,0);
+        if (rightController.activateAction.action.ReadValue<float>() == 1) {
+            dir += Vector3.Normalize(-rightController.transform.forward);
+        }
+        if (leftController.activateAction.action.ReadValue<float>() == 1) {
+            dir += Vector3.Normalize(-leftController.transform.forward);
+        }
+        return dir * acceleration * 100 * Time.deltaTime;
+    }
+
+    void applyForce() {
+        Vector3 force = getForce();
+        body.AddForce(force, ForceMode.Acceleration);
+        float newSpeed = Vector3.Magnitude(body.velocity + force);
+        if(newSpeed > maxSpeed) {
+            Vector3 diff = Vector3.Normalize(body.velocity + force) * (newSpeed - maxSpeed);
+            body.AddForce(-diff, ForceMode.Acceleration);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         body = transform.GetComponentInParent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        var forceVector = getForce();
-
-        //reset force to new direction
-        body.AddForce(-body.velocity);
-        body.AddForce(forceVector);
+        applyForce();
     }
 }

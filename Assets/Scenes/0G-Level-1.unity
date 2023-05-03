@@ -249,7 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightController: {fileID: 994725589}
   leftController: {fileID: 280090425}
-  speed: 3
+  acceleration: 1
+  maxSpeed: 3
 --- !u!136 &101751219
 CapsuleCollider:
   m_ObjectHideFlags: 0
