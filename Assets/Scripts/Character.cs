@@ -6,6 +6,8 @@ using TMPro;
 public class Character : MonoBehaviour
 {
     public TeleportationProvider provider = null;
+    public Jetpack jetpack;
+    private Rigidbody body;
     public TMP_Text levelText;
     public TMP_Text levelNumberText;
     public int levelIdx;
@@ -14,6 +16,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        body = transform.GetComponentInParent<Rigidbody>();
         levelText.SetText(LevelInfo.getDescription(levelIdx));
         levelNumberText.SetText("Level: " + (levelIdx + 1));
         counter = 5;
@@ -24,9 +27,12 @@ public class Character : MonoBehaviour
     {
         updateCounter();
 
-        if(transform.position.y < -25) {
+        if(Vector3.Magnitude(transform.position) > 100) {
+            levelText.SetText("You got too far away. Try again");
+            counter = 10;
             TeleportRequest request = CreateTeleportationRequest(new Vector3(0,0,0));
             provider.QueueTeleportRequest(request);
+            jetpack.resetMomentum();
         }
     }
 

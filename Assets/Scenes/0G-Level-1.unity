@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   provider: {fileID: 101751212}
+  jetpack: {fileID: 101751218}
   levelText: {fileID: 1238704631}
   levelNumberText: {fileID: 1016647675}
   levelIdx: 0
@@ -366,7 +367,7 @@ MonoBehaviour:
   fuelIndicator: {fileID: 866772304}
   startingFuel: 100
   acceleration: 1
-  maxSpeed: 3
+  maxSpeed: 5
 --- !u!136 &101751219
 CapsuleCollider:
   m_ObjectHideFlags: 0

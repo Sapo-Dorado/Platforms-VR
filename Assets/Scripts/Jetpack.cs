@@ -23,9 +23,11 @@ public class Jetpack : MonoBehaviour
         // int debugJetpack = 1;
         Vector3 dir = new Vector3(0,0,0);
         if (rightController.activateAction.action.ReadValue<float>() == 1) {
+            updateFuel(-1 * Time.deltaTime);
             dir += Vector3.Normalize(debugJetpack * rightController.transform.forward);
         }
         if (leftController.activateAction.action.ReadValue<float>() == 1) {
+            updateFuel(-1 * Time.deltaTime);
             dir += Vector3.Normalize(debugJetpack * leftController.transform.forward);
         }
         return dir * acceleration * 100 * Time.deltaTime;
@@ -34,14 +36,11 @@ public class Jetpack : MonoBehaviour
     void applyForce() {
         if (fuel > 0) {
             Vector3 force = getForce();
-            if(Vector3.Magnitude(force) > 0) {
-                updateFuel(-1 * Time.deltaTime);
-                body.AddForce(force, ForceMode.Acceleration);
-                float newSpeed = Vector3.Magnitude(body.velocity + force);
-                if(newSpeed > maxSpeed) {
-                    Vector3 diff = Vector3.Normalize(body.velocity + force) * (newSpeed - maxSpeed);
-                    body.AddForce(-diff, ForceMode.Acceleration);
-                }
+            body.AddForce(force, ForceMode.Acceleration);
+            float newSpeed = Vector3.Magnitude(body.velocity + force);
+            if(newSpeed > maxSpeed) {
+                Vector3 diff = Vector3.Normalize(body.velocity + force) * (newSpeed - maxSpeed);
+                body.AddForce(-diff, ForceMode.Acceleration);
             }
         }
     }
@@ -49,6 +48,10 @@ public class Jetpack : MonoBehaviour
     void updateFuel(float amount) {
         fuel += amount;
         fuelIndicator.SetText(String.Format("Fuel: {0}", fuel.ToString("F2")));
+    }
+
+    public void resetMomentum() {
+        body.velocity = new Vector3(0,0,0);
     }
 
     // Start is called before the first frame update
