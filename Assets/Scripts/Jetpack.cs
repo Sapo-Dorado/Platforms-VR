@@ -21,7 +21,7 @@ public class Jetpack : MonoBehaviour
     Vector3 getForce() {
         int debugJetpack = -1;
         //Set to 1 to reverse direction to make navigation within unity easier
-        debugJetpack = 1;
+        // debugJetpack = 1;
         Vector3 dir = new Vector3(0,0,0);
         if (rightController.activateAction.action.ReadValue<float>() == 1) {
             updateFuel(-1 * Time.deltaTime);
