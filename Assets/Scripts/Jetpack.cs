@@ -51,7 +51,8 @@ public class Jetpack : MonoBehaviour
     }
 
     public void resetMomentum() {
-        fuel = startingFuel;
+        fuel = 0;
+        updateFuel(startingFuel);
         body.velocity = new Vector3(0,0,0);
     }
 
