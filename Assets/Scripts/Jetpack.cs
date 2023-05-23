@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem.UI;
 using TMPro;
 
 public class Jetpack : MonoBehaviour
@@ -20,17 +21,22 @@ public class Jetpack : MonoBehaviour
     Vector3 getForce() {
         int debugJetpack = -1;
         //Set to 1 to reverse direction to make navigation within unity easier
-        // debugJetpack = 1;
+        debugJetpack = 1;
         Vector3 dir = new Vector3(0,0,0);
         if (rightController.activateAction.action.ReadValue<float>() == 1) {
             updateFuel(-1 * Time.deltaTime);
-            dir += Vector3.Normalize(debugJetpack * rightController.transform.forward);
+            dir += Vector3.Normalize(debugJetpack * getControllerDirection(rightController));
         }
         if (leftController.activateAction.action.ReadValue<float>() == 1) {
             updateFuel(-1 * Time.deltaTime);
-            dir += Vector3.Normalize(debugJetpack * leftController.transform.forward);
+            dir += Vector3.Normalize(debugJetpack * getControllerDirection(leftController));
         }
         return dir * acceleration * 100 * Time.deltaTime;
+    }
+    Vector3 getControllerDirection(ActionBasedController controller)
+    {
+        return controller.GetComponent<TrackedDeviceRaycaster>().transform.forward;
+
     }
 
     void applyForce() {

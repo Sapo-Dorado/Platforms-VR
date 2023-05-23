@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem.UI;
 
 public class Throwable : XRGrabInteractable
 {
@@ -11,8 +12,8 @@ public class Throwable : XRGrabInteractable
     }
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
-        // Vector3 force = applySpeed(args.interactorObject.transform.gameObject.GetComponent<ActionBasedController>().transform.forward, 20);
-        // transform.GetComponentInParent<Rigidbody>().AddForce(force);
+        Vector3 force = applySpeed(args.interactorObject.transform.gameObject.GetComponent<TrackedDeviceRaycaster>().transform.forward, 20);
+        transform.GetComponentInParent<Rigidbody>().AddForce(force);
     }
 
     private Vector3 applySpeed(Vector3 dir, int speed)
