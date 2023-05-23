@@ -51,6 +51,10 @@ public class Jetpack : MonoBehaviour
         }
     }
 
+    public void applyExternalForce(Vector3 force) {
+        body.AddForce(force);
+    }
+
     void updateFuel(float amount) {
         fuel += amount;
         fuelIndicator.SetText(String.Format("Fuel: {0}", fuel.ToString("F2")));
