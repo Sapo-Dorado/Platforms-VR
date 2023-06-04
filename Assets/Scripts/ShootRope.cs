@@ -27,6 +27,7 @@ public class ShootRope : MonoBehaviour
 
     private int count = 0;
     private int layerMask;
+    
 
     //public CreateRope createRope;
 
