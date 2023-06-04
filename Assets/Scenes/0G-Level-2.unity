@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 101751219}
   - component: {fileID: 101751209}
   - component: {fileID: 101751218}
+  - component: {fileID: 101751221}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -273,7 +274,7 @@ MonoBehaviour:
   jetpack: {fileID: 101751218}
   levelText: {fileID: 1238704631}
   levelNumberText: {fileID: 1016647675}
-  levelIdx: 1
+  levelInfo: {fileID: 101751221}
 --- !u!114 &101751212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +399,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &101751221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101751208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337a8c50ca042479395b88b8799086e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLevelIdx: 1
 --- !u!1 &280090420
 GameObject:
   m_ObjectHideFlags: 0

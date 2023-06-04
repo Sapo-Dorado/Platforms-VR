@@ -10,15 +10,16 @@ public class Character : MonoBehaviour
     private Rigidbody body;
     public TMP_Text levelText;
     public TMP_Text levelNumberText;
-    public int levelIdx;
+
+    public LevelInfo levelInfo;
 
     private float counter = 0;
 
     void Start()
     {
         body = transform.GetComponentInParent<Rigidbody>();
-        levelText.SetText(LevelInfo.getDescription(levelIdx));
-        levelNumberText.SetText("Level: " + (levelIdx + 1));
+        levelText.SetText(LevelInfo.getDescription(levelInfo.curLevel()));
+        levelNumberText.SetText("Level: " + (levelInfo.curLevel() + 1));
         counter = 5;
     }
 
@@ -55,7 +56,6 @@ public class Character : MonoBehaviour
 
     public void hasWon()
     {
-        levelIdx = LevelInfo.nextLevel(levelIdx);
-        SceneManager.LoadScene(LevelInfo.getLevel(levelIdx));
+        levelInfo.loadNextLevel();
     }
 }
