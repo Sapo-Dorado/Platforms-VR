@@ -11,7 +11,6 @@ public class ShootRope : MonoBehaviour
     public Rigidbody player;
     //public GameObject webEnd;
     public ActionBasedController controllerLeft;
-    public ActionBasedController controllerRight;
     public GameObject leftHand;
     
     private LineRenderer lineRenderer;
@@ -21,13 +20,14 @@ public class ShootRope : MonoBehaviour
     private CharacterJoint joint1;
 
     private bool leftIsShooting;
-    private bool rightIsShooting;
 
     private float maxDistance = 100;
     private Vector3 webPoint;
     float distanceFromPoint;
 
     private int count = 0;
+    private int layerMask;
+    
 
     //public CreateRope createRope;
 
@@ -35,9 +35,13 @@ public class ShootRope : MonoBehaviour
     void Start()
     {
         leftIsShooting = false;
-        rightIsShooting = false;
-        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.widthMultiplier = 0.01f;
+
+        //set up layermask
+        layerMask = 1 << 2;
+        layerMask = ~layerMask;
     }
 
     // Update is called once per frame
@@ -45,7 +49,11 @@ public class ShootRope : MonoBehaviour
     {
         checkInput();
 
-        Debug.Log(count);
+        //if(controllerLeft.IsPressed()){
+        //
+        //}
+
+        //Debug.Log(count);
 
         if(leftIsShooting){
             lineRenderer.enabled = true;
@@ -90,14 +98,12 @@ public class ShootRope : MonoBehaviour
     //will cause the "web" to be shot out of the player's 
     private void shootWeb(){
         RaycastHit hit;
-        if(Physics.Raycast(shooterTip.position, shooterTip.forward, out hit, maxDistance)){
+        if(Physics.Raycast(shooterTip.position, shooterTip.forward, out hit, maxDistance, layerMask)){
             Debug.Log("HIT!");
             webPoint = hit.point;
             Debug.Log("Where it hit: " + hit.point);
-            if(hit.rigidbody){
-                //webEnd = createRope.makeRope(webPoint, hit.rigidbody, shooterTip);
-                //Debug.Log("Where it hit: " + hit.point);
-                //webEnd = hit.rigidbody;
+            if(!hit.rigidbody){
+                stopWeb();
             }
             
             joint1 = player.gameObject.AddComponent<CharacterJoint>();
@@ -125,9 +131,11 @@ public class ShootRope : MonoBehaviour
     }
 
     private void stopWeb(){
-        Destroy(joint1);
+        if(joint1)
+            Destroy(joint1);
         leftIsShooting = false;
         count = 0;
+        player.transform.rotation = Quaternion.identity;
 
         if(endJoint) Destroy(endJoint);
 
