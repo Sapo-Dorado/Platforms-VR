@@ -31,6 +31,7 @@ public class ShootRope : MonoBehaviour
     private Rigidbody hitObj;
 
     public GameObject camera;
+    public AudioSource audioSource;
 
 
     //public CreateRope createRope;
@@ -60,7 +61,7 @@ public class ShootRope : MonoBehaviour
         //
         //}
 
-        Debug.Log(camera.transform.rotation);
+        //Debug.Log(camera.transform.rotation);
 
         if(leftIsShooting){
             lineRenderer.enabled = true;
@@ -111,6 +112,10 @@ public class ShootRope : MonoBehaviour
     private void shootWeb(){
         RaycastHit hit;
         if(Physics.Raycast(shooterTip.position, shooterTip.forward, out hit, maxDistance, layerMask)){
+            if(audioSource!= null){
+                audioSource.Play(0);
+            }
+            
             Debug.Log("HIT!");
             webPoint = hit.point;
             Debug.Log("Where it hit: " + hit.point);
