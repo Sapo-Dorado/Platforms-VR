@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class WinZone : MonoBehaviour
 {
+    private bool hasTriggered = false;
     void OnTriggerEnter(Collider other) {
         Character character = other.gameObject.GetComponentInParent<Character>();
         if(character != null) {
-            character.hasWon();
-            GetComponent<AudioSource>().Play();
+            if(!hasTriggered) {
+                character.hasWon();
+                GetComponent<AudioSource>().Play();
+                hasTriggered = true;
+            }
         }
         
         SwingingCharacter swingingCharacter = other.gameObject.GetComponentInParent<SwingingCharacter>();
         if(swingingCharacter != null) {
-            swingingCharacter.hasWon();
-            GetComponent<AudioSource>().Play();
+            if(!hasTriggered) {
+                swingingCharacter.hasWon();
+                GetComponent<AudioSource>().Play();
+                hasTriggered = true;
+            }
         }
     }
 }

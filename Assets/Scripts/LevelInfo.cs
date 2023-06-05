@@ -25,6 +25,7 @@ public class LevelInfo : MonoBehaviour {
   }
 
   public static int nextLevel(int idx) {
+    Debug.Log((idx + 1) % levelCount);
     return (idx + 1) % levelCount;
   }
 
