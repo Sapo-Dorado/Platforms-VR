@@ -30,6 +30,8 @@ public class ShootRope : MonoBehaviour
     private int layerMask;
     private Rigidbody hitObj;
 
+    public GameObject camera;
+
 
     //public CreateRope createRope;
 
@@ -58,7 +60,7 @@ public class ShootRope : MonoBehaviour
         //
         //}
 
-        //Debug.Log(count);
+        Debug.Log(camera.transform.rotation);
 
         if(leftIsShooting){
             lineRenderer.enabled = true;
@@ -129,6 +131,7 @@ public class ShootRope : MonoBehaviour
             }
 
             //configuring rotation
+            //if(camera.transform.rotation.y - 0.69)
             joint1.axis = new Vector3(1.0f, 0.0f, 0.0f);
             joint1.swingAxis =  new Vector3(0.0f, 0.0f, 1.0f);
 
@@ -140,6 +143,8 @@ public class ShootRope : MonoBehaviour
         }
 
     }
+
+
 
     private void stopWeb(){
         if(joint1)
