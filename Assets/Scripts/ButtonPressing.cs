@@ -8,7 +8,7 @@ public class ButtonPressing : MonoBehaviour
     public Character character;
     void OnTriggerEnter(Collider other) {
         if(!isPressed) {
-            transform.position -= Vector3.Normalize(transform.forward) / 3;
+            transform.position -= Vector3.Normalize(transform.forward) / 6;
             isPressed = true;
             GetComponent<AudioSource>().Play();
             character.addGravity();

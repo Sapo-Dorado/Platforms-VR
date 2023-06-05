@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelInfo : MonoBehaviour {
   public int curLevelIdx;
+  private float counter = 0;
   private static string[] levels = new string[] {"0G-Level-1", "0G-Level-2", "0G-Level-3", "0G-Level-4", "0G-Level-5", "Swigning-Level-1", "Swinging-Level-2", "End"};
   private static string[] descriptions = new string[] {
     "<b>Level One</b>\nUse your jetpacks to make it to the green zone and escape.",
@@ -30,11 +31,24 @@ public class LevelInfo : MonoBehaviour {
 
   public void loadNextLevel() {
     curLevelIdx = nextLevel(curLevelIdx);
-    SceneManager.LoadScene(getLevel(curLevelIdx));
+    if(curLevelIdx == 5) {
+      counter = 0.5f;
+    } else {
+      counter = 1.5f;
+    }
   }
 
   public int curLevel() {
     return curLevelIdx;
+  }
+  void Update()
+  {
+    if (counter > 0) {
+      counter -= 1 * Time.deltaTime;
+      if(counter <= 0.01) {
+        SceneManager.LoadScene(getLevel(curLevelIdx));
+      }
+    }
   }
 
 }
