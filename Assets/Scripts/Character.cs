@@ -14,12 +14,13 @@ public class Character : MonoBehaviour
     public LevelInfo levelInfo;
 
     private float counter = 0;
+    private bool nextLevel = false;
 
     void Start()
     {
         body = transform.GetComponentInParent<Rigidbody>();
         levelText.SetText(LevelInfo.getDescription(levelInfo.curLevel()));
-        levelNumberText.SetText("Level: " + (levelInfo.curLevel() + 1));
+        levelNumberText.SetText("  Level: " + (levelInfo.curLevel() + 1));
         counter = 5;
     }
 
@@ -42,8 +43,17 @@ public class Character : MonoBehaviour
             counter -= 1 * Time.deltaTime;
             if(counter <= 0) {
                 levelText.SetText("");
+                if(nextLevel) {
+                    levelInfo.loadNextLevel();
+                }
             }
         }
+    }
+
+    public void addGravity() {
+        body.useGravity = true;
+        nextLevel = true;
+        counter = 3;
     }
 
     private TeleportRequest CreateTeleportationRequest(Vector3 pos) {
