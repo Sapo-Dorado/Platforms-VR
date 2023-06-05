@@ -677,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695378669}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.829544, y: 1.2, z: 17.7}
+  m_LocalPosition: {x: 0, y: -10, z: 30}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1181,6 +1181,7 @@ MonoBehaviour:
   player: {fileID: 1943849700}
   controllerLeft: {fileID: 1146154209}
   leftHand: {fileID: 1146154205}
+  lineColor: {fileID: 2100000, guid: 7efa750847b364a80951a044659a5896, type: 2}
 --- !u!1 &1547563266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1547563267
 Transform:
   m_ObjectHideFlags: 0
@@ -1458,6 +1459,7 @@ MonoBehaviour:
   player: {fileID: 1943849700}
   controllerLeft: {fileID: 1610519986}
   leftHand: {fileID: 1610519982}
+  lineColor: {fileID: 2100000, guid: 7efa750847b364a80951a044659a5896, type: 2}
 --- !u!114 &1673112611 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1808574655574000632, guid: 895f6f3c2d334633b5800312285058d2,
@@ -1717,6 +1719,7 @@ MonoBehaviour:
   player: {fileID: 1943849700}
   controllerLeft: {fileID: 1610519986}
   leftHand: {fileID: 1610519982}
+  lineColor: {fileID: 0}
 --- !u!1 &1982265138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7696548424635294048, guid: 895f6f3c2d334633b5800312285058d2,

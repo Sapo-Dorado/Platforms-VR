@@ -14,6 +14,7 @@ public class ShootRope : MonoBehaviour
     public GameObject leftHand;
     
     private LineRenderer lineRenderer;
+    public Material lineColor;
 
     private SpringJoint joint;
     private FixedJoint endJoint;
@@ -27,7 +28,10 @@ public class ShootRope : MonoBehaviour
 
     private int count = 0;
     private int layerMask;
-    
+    private Rigidbody hitObj;
+
+    public GameObject camera;
+
 
     //public CreateRope createRope;
 
@@ -38,6 +42,9 @@ public class ShootRope : MonoBehaviour
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         //lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.widthMultiplier = 0.01f;
+        if(lineColor != null){
+            lineRenderer.material = lineColor;
+        }
 
         //set up layermask
         layerMask = 1 << 2;
@@ -53,13 +60,18 @@ public class ShootRope : MonoBehaviour
         //
         //}
 
-        //Debug.Log(count);
+        Debug.Log(camera.transform.rotation);
 
         if(leftIsShooting){
             lineRenderer.enabled = true;
             lineRenderer.positionCount = 2;
             lineRenderer.SetPosition(0,shooterTip.position);
-            lineRenderer.SetPosition(1, webPoint);
+            if(hitObj != null){
+                lineRenderer.SetPosition(1, hitObj.gameObject.transform.position);
+            }else{
+                lineRenderer.SetPosition(1, webPoint);
+            }
+            
         }else{
             lineRenderer.enabled = false;
         }
@@ -115,9 +127,11 @@ public class ShootRope : MonoBehaviour
 
             if(hit.rigidbody && hit.rigidbody != player.GetComponent<Rigidbody>()){
                 joint1.connectedBody = hit.rigidbody;
+                hitObj = hit.rigidbody;
             }
 
             //configuring rotation
+            //if(camera.transform.rotation.y - 0.69)
             joint1.axis = new Vector3(1.0f, 0.0f, 0.0f);
             joint1.swingAxis =  new Vector3(0.0f, 0.0f, 1.0f);
 
@@ -130,12 +144,15 @@ public class ShootRope : MonoBehaviour
 
     }
 
+
+
     private void stopWeb(){
         if(joint1)
             Destroy(joint1);
         leftIsShooting = false;
         count = 0;
         player.transform.rotation = Quaternion.identity;
+        hitObj = null;
 
         if(endJoint) Destroy(endJoint);
 
