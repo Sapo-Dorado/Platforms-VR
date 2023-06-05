@@ -9,5 +9,10 @@ public class WinZone : MonoBehaviour
         if(character != null) {
             character.hasWon();
         }
+        
+        SwingingCharacter swingingCharacter = other.gameObject.GetComponentInParent<SwingingCharacter>();
+        if(swingingCharacter != null) {
+            swingingCharacter.hasWon();
+        }
     }
 }

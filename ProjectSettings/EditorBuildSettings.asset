@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/0G-Level-4.unity
     guid: 49736302ade194514859ccdef56f946c
+  - enabled: 1
+    path: Assets/Scenes/Swigning-Level-1.unity
+    guid: 50d6da6ab86c24dffa9d2d5d99e3d148
+  - enabled: 1
+    path: Assets/Scenes/Swinging-Level-2.unity
+    guid: ee8c983765dba44a48b280fb94aa2007
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
       type: 2}
