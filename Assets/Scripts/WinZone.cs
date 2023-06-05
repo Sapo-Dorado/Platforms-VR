@@ -8,11 +8,13 @@ public class WinZone : MonoBehaviour
         Character character = other.gameObject.GetComponentInParent<Character>();
         if(character != null) {
             character.hasWon();
+            GetComponent<AudioSource>().Play();
         }
         
         SwingingCharacter swingingCharacter = other.gameObject.GetComponentInParent<SwingingCharacter>();
         if(swingingCharacter != null) {
             swingingCharacter.hasWon();
+            GetComponent<AudioSource>().Play();
         }
     }
 }

@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     {
         body = transform.GetComponentInParent<Rigidbody>();
         levelText.SetText(LevelInfo.getDescription(levelInfo.curLevel()));
-        levelNumberText.SetText("Level: " + (levelInfo.curLevel() + 1));
+        levelNumberText.SetText("  Level: " + (levelInfo.curLevel() + 1));
         counter = 5;
     }
 
