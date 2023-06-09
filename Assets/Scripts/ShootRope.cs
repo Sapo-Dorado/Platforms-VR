@@ -22,7 +22,7 @@ public class ShootRope : MonoBehaviour
 
     private bool leftIsShooting;
 
-    private float maxDistance = 100;
+    private float maxDistance = 17;
     private Vector3 webPoint;
     float distanceFromPoint;
 
